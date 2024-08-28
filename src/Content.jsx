@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { MembersIndex } from "./MembersIndex";
+import { MembersNew } from "./MembersNew";
 import { MembersShow } from "./MembersShow";
 import { Modal } from "./Modal";
 
@@ -17,6 +18,14 @@ export function Content() {
     });
   };
 
+  const handleCreateMember = (params, successCallback) => {
+    console.log("handleCreateMember", params);
+    axios.post("http://localhost:3000/members.json", params).then((response) => {
+      setMembers([...members, response.data]);
+      successCallback();
+    })
+  }
+
   const handleShowMember = (member) => {
     console.log("handleShowMember", member);
     setIsMemberShowVisible(true);
@@ -32,6 +41,7 @@ export function Content() {
   
   return (
     <div>
+      <MembersNew onCreateMember={handleCreateMember} />
       <MembersIndex members={members} onShowMember={handleShowMember} />
       <Modal show={isMemberShowVisible} onClose={handleClose}>
         <MembersShow member={currentMember} />
