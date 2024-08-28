@@ -8,7 +8,8 @@ export function MembersIndex(props) {
           <h2>{member.name}</h2>
           <p>Phone Number: {member.phone_number}</p>
           <p>Position: {member.position}</p>
-          </div>
+          <button onClick={() => props.onShowMember(member)}>More Info</button>  
+        </div>
       ))}
     </div>
   )
