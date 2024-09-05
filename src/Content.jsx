@@ -61,7 +61,7 @@ export function Content() {
       <MembersNew onCreateMember={handleCreateMember} />
       <MembersIndex members={members} onShowMember={handleShowMember} />
       <Modal show={isMemberShowVisible} onClose={handleClose}>
-        <MembersShow member={currentMember} onUpdatePhoto={handleUpdateMember} />
+        <MembersShow member={currentMember} onUpdateMember={handleUpdateMember} />
       </Modal>
     </div>
   )

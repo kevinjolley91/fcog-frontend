@@ -1,12 +1,19 @@
 /* eslint-disable react/prop-types */
 export function MembersShow(props) {
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    props.onUpdateMember(props.member.id, params, () => event.target.reset());
+  }
+
   return (
     <div>
       <h1>Member Information</h1>
       <p>Name: {props.member.name}</p>
       <p>Phone Number: {props.member.phone_number}</p>
       <p>Position: {props.member.position}</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           Name: <input defaultValue={props.member.name} name="name" type="text" />
         </div>
@@ -16,6 +23,7 @@ export function MembersShow(props) {
         <div>
           Position: <input defaultValue={props.member.position} name="position" type="text" />
         </div>
+        <button type="submit">Update Member</button>
       </form>
     </div>
   )
