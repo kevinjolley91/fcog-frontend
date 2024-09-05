@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { MembersIndex } from "./MembersIndex";
@@ -54,6 +55,14 @@ export function Content() {
     setIsMemberShowVisible(false);
   };
 
+  const handleDestroyMember = (member) => {
+    console.log("handleDestroyMember", member);
+    axios.delete(`http://localhost:3000/members/${member.id}.json`).then((response) => {
+      setMembers(members.filter((m) => m.id !== member.id));
+      handleClose();
+    })
+  }
+
   useEffect(handleIndexMembers, []);
   
   return (
@@ -61,7 +70,7 @@ export function Content() {
       <MembersNew onCreateMember={handleCreateMember} />
       <MembersIndex members={members} onShowMember={handleShowMember} />
       <Modal show={isMemberShowVisible} onClose={handleClose}>
-        <MembersShow member={currentMember} onUpdateMember={handleUpdateMember} />
+        <MembersShow member={currentMember} onUpdateMember={handleUpdateMember} onDestroyMember={handleDestroyMember} />
       </Modal>
     </div>
   )

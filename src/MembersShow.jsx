@@ -7,6 +7,10 @@ export function MembersShow(props) {
     props.onUpdateMember(props.member.id, params, () => event.target.reset());
   }
 
+  const handleClick = () => {
+    props.onDestroyMember(props.member);
+  }
+
   return (
     <div>
       <h1>Member Information</h1>
@@ -25,6 +29,7 @@ export function MembersShow(props) {
         </div>
         <button type="submit">Update Member</button>
       </form>
+      <button onClick={handleClick}>Delete Member</button>
     </div>
   )
 }
